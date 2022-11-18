@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "142055967078",
+    "project_id": "rubikpedia",
+    "storage_bucket": "rubikpedia.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:142055967078:android:eab4287e50cba2c3b3e0a7",
+        "android_client_info": {
+          "package_name": "com.android.application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "142055967078-b4htg24r9rvpki81ob7gb8qlkklgh3ob.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAohBV1s-1BNQM1ntrz9Gt2qMA1_09cvAo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "142055967078-b4htg24r9rvpki81ob7gb8qlkklgh3ob.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
