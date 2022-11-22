@@ -7,6 +7,8 @@ import {
   Alert,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
+import {View, Text, Touchable} from 'react-native';
+import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from './src/Pages/HomeScreen';
@@ -80,6 +82,7 @@ const App = () => {
             } else if (route.name === 'Notación') {
               iconName = 'pencil-alt';
             }
+
             return <Icon name={iconName} size={size} color={color} />;
           },
           tabBarActiveTintColor: 'tomato',
@@ -89,6 +92,9 @@ const App = () => {
         <Tab.Screen name="Partes" component={ImportantPartsScreen} />
         <Tab.Screen name="Inicio" component={HomeScreen} />
         <Tab.Screen name="Notación" component={NotationScreen} />
+        {/* <Touchable onPress={() => console.log('hola')}>
+          <Tab.Screen name="Logout" component={NotationScreen} />
+        </Touchable> */}
       </Tab.Navigator>
     </NavigationContainer>
   );
