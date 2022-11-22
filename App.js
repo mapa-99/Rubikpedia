@@ -1,4 +1,4 @@
-import {View, Text} from 'react-native';
+import {View, Text, Touchable} from 'react-native';
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -7,6 +7,7 @@ import ProfileScreen from './src/Pages/ProfileScreen';
 import ImportantPartsScreen from './src/Pages/ImportantPartsScreen';
 import NotationScreen from './src/Pages/NotationScreen';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+
 const Tab = createBottomTabNavigator();
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
             } else if (route.name === 'Notación') {
               iconName = 'pencil-alt';
             }
+
             return <Icon name={iconName} size={size} color={color} />;
           },
           tabBarActiveTintColor: 'tomato',
@@ -33,6 +35,9 @@ const App = () => {
         <Tab.Screen name="Partes" component={ImportantPartsScreen} />
         <Tab.Screen name="Inicio" component={HomeScreen} />
         <Tab.Screen name="Notación" component={NotationScreen} />
+        {/* <Touchable onPress={() => console.log('hola')}>
+          <Tab.Screen name="Logout" component={NotationScreen} />
+        </Touchable> */}
       </Tab.Navigator>
     </NavigationContainer>
   );
