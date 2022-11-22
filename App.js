@@ -1,14 +1,5 @@
-import {
-  View,
-  Text,
-  Button,
-  StyleSheet,
-  SafeAreaView,
-  Alert,
-} from 'react-native';
+import {View, Text, Button, StyleSheet, SafeAreaView} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {View, Text, Touchable} from 'react-native';
-import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from './src/Pages/HomeScreen';
@@ -21,7 +12,8 @@ import {auth} from './src/constants/firebase';
 const Tab = createBottomTabNavigator();
 
 const App = () => {
-  const [initializing, setInitializing] = useState(false);
+  // Set an initializing state whilst Firebase connects
+  const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
 
   // Handle user state changes
@@ -31,14 +23,7 @@ const App = () => {
   }
 
   useEffect(() => {
-    const subscriber = auth.onAuthStateChanged(
-      onAuthStateChanged(function (user, err) {
-        if (user) {
-          Actions.signUpVerify();
-        } else {
-        }
-      }),
-    );
+    const subscriber = auth.onAuthStateChanged(onAuthStateChanged);
     return subscriber; // unsubscribe on unmount
   }, []);
 
@@ -48,16 +33,24 @@ const App = () => {
     return (
       <SafeAreaView style={styles.container}>
         <View>
-          <Text style={styles.title}>
-            The title and onPress handler are required. It is recommended to set
-            accessibilityLabel to help make your app usable by everyone.
-          </Text>
           <Button
-            title="Press me"
+            title="Login"
+            onPress={async () => {
+              const res = await auth.signInWithEmailAndPassword(
+                'stet@gmail.com',
+                '123456A',
+              );
+              console.log(res);
+            }}
+          />
+          <Text>-</Text>
+
+          <Button
+            title="Registro"
             onPress={async () => {
               const res = await auth.createUserWithEmailAndPassword(
                 'stet@gmail.com',
-                '1234',
+                '123456A',
               );
               console.log(res);
             }}
