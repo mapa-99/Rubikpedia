@@ -1,15 +1,17 @@
-import {View, Text} from 'react-native';
-import React from 'react';
+import {View, Text, Button} from 'react-native';
+import WebView from 'react-native-webview';
 
 const HomeScreen = () => {
   return (
-    <View>
-      <Text>HomeScreen</Text>
-      <Button
-        title="Press me"
-        onPress={() => Alert.alert('Simple Button pressed')}
-      />
-    </View>
+    <WebView
+      source={{
+        uri: 'https://codepen.io/bsehovac/full/EMyWVv',
+      }}
+      style={{
+        display: 'flex',
+        marginTop: -60,
+      }}
+    />
   );
 };
 

@@ -6,12 +6,6 @@ const ProfileScreen = () => {
   return (
     <View>
       <Text>Profile Screen</Text>
-      <TouchableOpacity
-        onPress={async () => {
-          await auth.signOut();
-        }}>
-        <Text>Cerrar sesion</Text>
-      </TouchableOpacity>
     </View>
   );
 };

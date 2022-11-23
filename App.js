@@ -1,15 +1,18 @@
-import {View, Text, Button, StyleSheet, SafeAreaView} from 'react-native';
-import React, {useEffect, useState} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import HomeScreen from './src/Pages/HomeScreen';
-import ProfileScreen from './src/Pages/ProfileScreen';
-import ImportantPartsScreen from './src/Pages/ImportantPartsScreen';
-import NotationScreen from './src/Pages/NotationScreen';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import React, {useEffect, useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {auth} from './src/constants/firebase';
+import HomeScreen from './src/Pages/HomeScreen';
+import ImportantPartsScreen from './src/Pages/ImportantPartsScreen';
+import Login from './src/Pages/Login';
+import NotationScreen from './src/Pages/NotationScreen';
+import ProfileScreen from './src/Pages/ProfileScreen';
+import Register from './src/Pages/Register';
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 const App = () => {
   // Set an initializing state whilst Firebase connects
@@ -31,32 +34,14 @@ const App = () => {
 
   if (!user) {
     return (
-      <SafeAreaView style={styles.container}>
-        <View>
-          <Button
-            title="Login"
-            onPress={async () => {
-              const res = await auth.signInWithEmailAndPassword(
-                'stet@gmail.com',
-                '123456A',
-              );
-              console.log(res);
-            }}
-          />
-          <Text>-</Text>
-
-          <Button
-            title="Registro"
-            onPress={async () => {
-              const res = await auth.createUserWithEmailAndPassword(
-                'stet@gmail.com',
-                '123456A',
-              );
-              console.log(res);
-            }}
-          />
-        </View>
-      </SafeAreaView>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="Login"
+          screenOptions={{headerShown: false}}>
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Register" component={Register} />
+        </Stack.Navigator>
+      </NavigationContainer>
     );
   }
 
@@ -74,6 +59,8 @@ const App = () => {
               iconName = 'house-user';
             } else if (route.name === 'Notación') {
               iconName = 'pencil-alt';
+            } else if (route.name === 'Cerrar') {
+              iconName = 'door-open';
             }
 
             return <Icon name={iconName} size={size} color={color} />;
@@ -85,33 +72,20 @@ const App = () => {
         <Tab.Screen name="Partes" component={ImportantPartsScreen} />
         <Tab.Screen name="Inicio" component={HomeScreen} />
         <Tab.Screen name="Notación" component={NotationScreen} />
-        {/* <Touchable onPress={() => console.log('hola')}>
-          <Tab.Screen name="Logout" component={NotationScreen} />
-        </Touchable> */}
+        <Tab.Screen
+          options={{headerShown: false}}
+          name="Cerrar"
+          component={() => {
+            useEffect(() => {
+              auth.signOut();
+            }, []);
+
+            return null;
+          }}
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    marginHorizontal: 16,
-  },
-  title: {
-    textAlign: 'center',
-    marginVertical: 8,
-  },
-  fixToText: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  separator: {
-    marginVertical: 8,
-    borderBottomColor: '#737373',
-    borderBottomWidth: StyleSheet.hairlineWidth,
-  },
-});
 
 export default App;
