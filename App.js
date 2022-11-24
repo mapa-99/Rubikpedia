@@ -68,9 +68,9 @@ const App = () => {
           tabBarActiveTintColor: 'tomato',
           tabBarInactiveTintColor: 'gray',
         })}>
-        <Tab.Screen name="Perfil" component={ProfileScreen} />
-        <Tab.Screen name="Partes" component={ImportantPartsScreen} />
         <Tab.Screen name="Inicio" component={HomeScreen} />
+        {/* <Tab.Screen name="Perfil" component={ProfileScreen} /> */}
+        <Tab.Screen name="Partes" component={ImportantPartsScreen} />
         <Tab.Screen name="Notación" component={NotationScreen} />
         <Tab.Screen
           options={{headerShown: false}}
