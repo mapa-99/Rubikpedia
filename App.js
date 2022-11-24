@@ -8,7 +8,7 @@ import HomeScreen from './src/Pages/HomeScreen';
 import ImportantPartsScreen from './src/Pages/ImportantPartsScreen';
 import Login from './src/Pages/Login';
 import NotationScreen from './src/Pages/NotationScreen';
-import ProfileScreen from './src/Pages/ProfileScreen';
+
 import Register from './src/Pages/Register';
 
 const Tab = createBottomTabNavigator();

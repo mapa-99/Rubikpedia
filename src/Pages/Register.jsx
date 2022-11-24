@@ -1,5 +1,5 @@
 import AnimatedLottieView from 'lottie-react-native';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {
   Button,
   SafeAreaView,
@@ -14,6 +14,17 @@ import {auth} from '../constants/firebase';
 const Register = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [habilita, setHabilita] = useState(false);
+  const regexEmailReg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+  useEffect(() => {
+    if (password.length >= 6 && email.match(regexEmailReg)) {
+      setHabilita(true);
+      console.log(email);
+    } else {
+      setHabilita(false);
+    }
+  }, [email, password, setPassword, setHabilita]);
 
   const handleRegister = async () => {
     await auth.createUserWithEmailAndPassword(email, password);
@@ -56,7 +67,11 @@ const Register = ({navigation}) => {
 
       <View style={styles.line} />
       <View style={styles.btns}>
-        <Button title="Registrar" onPress={handleRegister} />
+        <Button
+          title="Registrar"
+          onPress={handleRegister}
+          disabled={!habilita}
+        />
       </View>
       <TouchableOpacity onPress={handleGoToLogin}>
         <Text
